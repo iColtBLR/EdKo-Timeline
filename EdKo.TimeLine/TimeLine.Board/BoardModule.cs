@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Prism.Modularity;
+using TimeLine.Infrastucture;
 
 namespace TimeLine.Board
 {
-    public class BoardModule
+    [Module(ModuleName = ModuleNameLinks.BoardModule)]
+    public class BoardModule : ModuleBase
     {
+        public override void Initialize()
+        {
+            ConfigureContainers();
+            ConfigureServices();
+        }
+
+        public void ConfigureContainers()
+        {
+            // Container.RegisterType<>();
+        }
+
+        public void ConfigureServices()
+        {
+
+        }
     }
 }
