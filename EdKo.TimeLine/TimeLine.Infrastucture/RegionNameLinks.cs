@@ -5,6 +5,6 @@
         public const string MainRegion = "Main";
         public const string PopupRegion = "Popup";
         // test
-        public const string LeftRegion = "Left";
+        public const string HeaderRegion = "Header";
     }
 }

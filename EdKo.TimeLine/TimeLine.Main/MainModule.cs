@@ -2,6 +2,7 @@
 using Microsoft.Practices.Unity;
 using TimeLine.Infrastucture;
 using TimeLine.Main.Views.Main;
+using TimeLine.Main.Views.Navigation;
 
 namespace TimeLine.Main
 {
@@ -12,14 +13,18 @@ namespace TimeLine.Main
         {
             ConfigureContainers();
             ConfigureServices();
-            ShowMainView();
+	        ShowNavigationMenu();
+			ShowMainView();
         }
 
         public void ConfigureContainers()
         {
             Container.RegisterType<MainViewModel>();
             Container.RegisterType<IMainView, MainView>();
-        }
+
+	        Container.RegisterType<NavigationViewModel>();
+	        Container.RegisterType<INavigationView, NavigationView>();
+		}
 
         public void ConfigureServices()
         {
@@ -36,8 +41,13 @@ namespace TimeLine.Main
             //view.ViewModel.Initialize();
 
             //region.Activate(view);
-            var view = Container.Resolve<MainView>();
-            RegionManager.RegisterViewWithRegion(RegionNameLink.LeftRegion, () => view);
+            var view = Container.Resolve<IMainView>();
+            RegionManager.RegisterViewWithRegion(RegionNameLink.MainRegion, () => view);
         }
-    }
+
+		public void ShowNavigationMenu() {
+			var view = Container.Resolve<INavigationView>();
+			RegionManager.RegisterViewWithRegion(RegionNameLink.HeaderRegion, () => view);
+		}
+	}
 }
